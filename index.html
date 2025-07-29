@@ -2,171 +2,204 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <title>Test de Valeur Héroïque</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test de Degré d’Héroïsme</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #0d1b2a;
-      color: #f1f1f1;
+      font-family: 'Arial', sans-serif;
+      background: #0d0d2b;
+      color: #ffffff;
       padding: 20px;
       margin: 0;
-      max-width: 100%;
     }
-
-    h1, h2 {
+    h1 {
       text-align: center;
-      color: #00f7ff;
+      color: #ffcc00;
     }
-
     .question {
-      margin-bottom: 25px;
+      margin-bottom: 20px;
+      background: #1a1a3d;
       padding: 15px;
-      border-left: 4px solid #00f7ff;
-      background-color: #142b41;
-      border-radius: 8px;
+      border-radius: 10px;
     }
-
-    .question p {
-      margin-bottom: 10px;
-    }
-
     label {
       display: block;
-      margin-bottom: 10px;
-      background-color: #1b3a57;
-      padding: 10px;
-      border-radius: 5px;
+      margin-top: 5px;
       cursor: pointer;
-      transition: background-color 0.3s;
     }
-
-    label:hover {
-      background-color: #296d98;
-    }
-
-    input[type="radio"] {
-      margin-right: 10px;
-    }
-
     button {
-      display: block;
-      width: 100%;
-      margin: 30px auto 10px auto;
-      padding: 15px;
-      font-size: 1.1em;
-      background-color: #00f7ff;
+      background: #ffcc00;
       color: #000;
       border: none;
+      padding: 10px 20px;
+      font-size: 16px;
       border-radius: 8px;
       cursor: pointer;
-      font-weight: bold;
+      margin-top: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
-
-    button:hover {
-      background-color: #03d2d2;
-    }
-
     #result {
       margin-top: 30px;
-      font-size: 1.2em;
+      font-size: 20px;
+      font-weight: bold;
       text-align: center;
-      background-color: #112a41;
-      padding: 20px;
-      border-radius: 8px;
     }
 
-    @media screen and (max-width: 480px) {
-      h1 {
-        font-size: 1.5em;
-      }
+    .flash {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(138, 43, 226, 0.6);
+      z-index: 9999;
+      animation: flashAnimation 0.4s ease-out;
+      pointer-events: none;
+    }
 
-      button {
-        font-size: 1em;
-      }
-
-      label {
-        font-size: 0.95em;
-      }
+    @keyframes flashAnimation {
+      0% { opacity: 0; }
+      50% { opacity: 1; }
+      100% { opacity: 0; }
     }
   </style>
 </head>
 <body>
 
-<h1>🦸 Test du Degré d’Héroïsme</h1>
-<p style="text-align: center;">Réponds aux 10 questions pour découvrir ton pourcentage d’héroïsme !</p>
+<h1>Test de Valeur Héroïque</h1>
 
-<form id="quizForm"></form>
+<form id="heroTest">
 
-<button onclick="calculateHeroism()">Calculer mon Héroïsme</button>
+  <!-- 10 questions différentes -->
+  <div class="question">
+    <p>1. Tu entends une explosion en pleine rue. Que fais-tu ?</p>
+    <label><input type="radio" name="q1" value="4"> J’accours sans réfléchir pour sauver des vies.</label>
+    <label><input type="radio" name="q1" value="3"> J’évalue la situation avant d’intervenir.</label>
+    <label><input type="radio" name="q1" value="2"> J'appelle les secours, mais je reste à distance.</label>
+    <label><input type="radio" name="q1" value="1"> Je pars dans la direction opposée.</label>
+  </div>
+
+  <div class="question">
+    <p>2. On t'accuse à tort. Tu...</p>
+    <label><input type="radio" name="q2" value="4"> Démontres la vérité avec calme.</label>
+    <label><input type="radio" name="q2" value="3"> Te défends fermement mais sans violence.</label>
+    <label><input type="radio" name="q2" value="2"> Te venges en silence.</label>
+    <label><input type="radio" name="q2" value="1"> Laisses tomber, même si tu sais que c’est faux.</label>
+  </div>
+
+  <div class="question">
+    <p>3. Un camarade est en difficulté en cours, tu...</p>
+    <label><input type="radio" name="q3" value="4"> L’aides même si ça te coûte du temps personnel.</label>
+    <label><input type="radio" name="q3" value="3"> Lui donnes quelques conseils utiles.</label>
+    <label><input type="radio" name="q3" value="2"> Tu le laisses se débrouiller seul.</label>
+    <label><input type="radio" name="q3" value="1"> Tu t’en moques un peu, chacun sa galère.</label>
+  </div>
+
+  <div class="question">
+    <p>4. Tu trouves un objet perdu important...</p>
+    <label><input type="radio" name="q4" value="4"> Tu le rends immédiatement.</label>
+    <label><input type="radio" name="q4" value="3"> Tu demandes à qui il appartient.</label>
+    <label><input type="radio" name="q4" value="2"> Tu le gardes en attendant qu’on le réclame.</label>
+    <label><input type="radio" name="q4" value="1"> Tu le gardes pour toi.</label>
+  </div>
+
+  <div class="question">
+    <p>5. Tu as l’opportunité de tricher à un test. Tu...</p>
+    <label><input type="radio" name="q5" value="4"> Refuses catégoriquement.</label>
+    <label><input type="radio" name="q5" value="3"> Hésites mais fais le bon choix.</label>
+    <label><input type="radio" name="q5" value="2"> Triches un peu, juste cette fois.</label>
+    <label><input type="radio" name="q5" value="1"> Triches sans remords.</label>
+  </div>
+
+  <div class="question">
+    <p>6. Un méchant te tend une embuscade. Tu...</p>
+    <label><input type="radio" name="q6" value="4"> Gardes ton sang-froid et neutralises la menace.</label>
+    <label><input type="radio" name="q6" value="3"> Essaies de fuir puis contre-attaques.</label>
+    <label><input type="radio" name="q6" value="2"> Appelles à l’aide.</label>
+    <label><input type="radio" name="q6" value="1"> Tu paniques et abandonnes.</label>
+  </div>
+
+  <div class="question">
+    <p>7. Tu découvres que ton ami a un pouvoir dangereux. Tu...</p>
+    <label><input type="radio" name="q7" value="4"> L’aides à le contrôler pour éviter le pire.</label>
+    <label><input type="radio" name="q7" value="3"> Tu l’encourages à en parler à un prof.</label>
+    <label><input type="radio" name="q7" value="2"> Tu l’évites discrètement.</label>
+    <label><input type="radio" name="q7" value="1"> Tu le dénonces sans lui parler.</label>
+  </div>
+
+  <div class="question">
+    <p>8. Un inconnu te demande de l’aide sur le campus. Tu...</p>
+    <label><input type="radio" name="q8" value="4"> L’aides immédiatement avec le sourire.</label>
+    <label><input type="radio" name="q8" value="3"> Lui indiques la direction gentiment.</label>
+    <label><input type="radio" name="q8" value="2"> Fais semblant de ne pas entendre.</label>
+    <label><input type="radio" name="q8" value="1"> Tu l’ignores totalement.</label>
+  </div>
+
+  <div class="question">
+    <p>9. Face à une injustice, tu...</p>
+    <label><input type="radio" name="q9" value="4"> Interviens sans hésiter, même si ce n’est pas ton affaire.</label>
+    <label><input type="radio" name="q9" value="3"> Tu soutiens discrètement la victime.</label>
+    <label><input type="radio" name="q9" value="2"> Tu observes sans agir.</label>
+    <label><input type="radio" name="q9" value="1"> Tu pars pour éviter les problèmes.</label>
+  </div>
+
+  <div class="question">
+    <p>10. Tu obtiens un pouvoir rare. Tu...</p>
+    <label><input type="radio" name="q10" value="4"> L’utilises pour aider les autres sans hésiter.</label>
+    <label><input type="radio" name="q10" value="3"> T’entraînes avant de l’utiliser publiquement.</label>
+    <label><input type="radio" name="q10" value="2"> Le caches pour rester discret.</label>
+    <label><input type="radio" name="q10" value="1"> En profites pour servir tes intérêts.</label>
+  </div>
+
+  <button type="submit">Voir mon score héroïque</button>
+</form>
 
 <div id="result"></div>
 
+<!-- Son effet électrique -->
+<audio id="zapSound" src="https://cdn.pixabay.com/audio/2023/03/14/audio_72c1aa3fe4.mp3"></audio>
+
 <script>
-  const questions = [
-    "Un immeuble est en feu. Que fais-tu ?",
-    "Tu apprends qu’un camarade triche en mission. Que fais-tu ?",
-    "Quelle est ta motivation principale pour devenir un héros ?",
-    "Ton adversaire se rend. Que fais-tu ?",
-    "Un élève plus faible se fait harceler. Quelle est ta réaction ?",
-    "Ton équipe est en difficulté pendant une mission. Que fais-tu ?",
-    "On t’offre un pouvoir interdit mais très puissant. Que fais-tu ?",
-    "Comment vois-tu les civils ?",
-    "Tu découvres que ton mentor a commis des erreurs graves. Que fais-tu ?",
-    "Tu es blessé, mais quelqu’un a besoin de toi. Tu…"
-  ];
+  const zapSound = document.getElementById("zapSound");
 
-  const options = [
-    ["Je fonce sauver les gens sans hésiter.", 4],
-    ["Je préviens les secours et j’évalue les risques.", 3],
-    ["J’aide si je suis certain d’être en sécurité.", 2],
-    ["Je reste à distance, ce n’est pas mon problème.", 1]
-  ];
+  document.querySelectorAll('input[type="radio"]').forEach(input => {
+    input.addEventListener("change", () => {
+      zapSound.currentTime = 0;
+      zapSound.play();
 
-  const form = document.getElementById("quizForm");
-
-  questions.forEach((q, index) => {
-    const div = document.createElement("div");
-    div.classList.add("question");
-    div.innerHTML = `<h3>Question ${index + 1}</h3><p>${q}</p>`;
-
-    options.forEach((opt, i) => {
-      const inputId = `q${index}_opt${i}`;
-      div.innerHTML += `
-        <label>
-          <input type="radio" name="q${index}" value="${opt[1]}" required>
-          ${opt[0]}
-        </label>
-      `;
+      const flash = document.createElement("div");
+      flash.classList.add("flash");
+      document.body.appendChild(flash);
+      setTimeout(() => flash.remove(), 400);
     });
-
-    form.appendChild(div);
   });
 
-  function calculateHeroism() {
-    const formData = new FormData(form);
-    let score = 0;
+  document.getElementById("heroTest").addEventListener("submit", function (e) {
+    e.preventDefault();
+    let total = 0;
+    let max = 10 * 4;
 
-    for (let [key, value] of formData.entries()) {
-      score += parseInt(value);
+    for (let i = 1; i <= 10; i++) {
+      const answer = document.querySelector(`input[name="q${i}"]:checked`);
+      if (answer) total += parseInt(answer.value);
     }
 
-    let percent = Math.round((score / 40) * 100);
+    const percent = Math.round((total / max) * 100);
     let message = "";
 
-    if (score >= 36) message = "💎 100 % Héroïque : Un véritable symbole de justice !";
-    else if (score >= 30) message = "🔥 85 % Héroïque : Solide, fiable, respecté.";
-    else if (score >= 25) message = "⚡ 65 % Héroïque : Tu as du potentiel, reste concentré.";
-    else if (score >= 20) message = "🌗 50 % Héroïque : Tu balances entre lumière et ombre.";
-    else if (score >= 15) message = "🌩️ 35 % Héroïque : Un anti-héros en devenir ?";
-    else message = "🕳️ 20 % ou moins : Attention… la ligne est fine entre héros et menace.";
+    if (percent >= 90) {
+      message = "🔥 Tu es un héros légendaire de la Nova Académie !";
+    } else if (percent >= 70) {
+      message = "⚡ Tu as l’étoffe d’un grand héros, continue comme ça !";
+    } else if (percent >= 50) {
+      message = "💪 Tu es sur le bon chemin. Entraîne-toi !";
+    } else {
+      message = "🌀 Tu as encore des progrès à faire, jeune recrue.";
+    }
 
-    document.getElementById("result").innerHTML = `
-      <strong>Score :</strong> ${score}/40<br>
-      <strong>Pourcentage d’Héroïsme :</strong> ${percent}%<br><br>
-      ${message}
-    `;
-  }
+    document.getElementById("result").textContent = `Score : ${percent}% — ${message}`;
+  });
 </script>
 
 </body>
