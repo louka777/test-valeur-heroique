@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test de Degré d’Héroïsme</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0d1b2a;
+      color: #f1f1f1;
+      padding: 20px;
+      margin: 0;
+      max-width: 100%;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #00f7ff;
+    }
+
+    .question {
+      margin-bottom: 25px;
+      padding: 15px;
+      border-left: 4px solid #00f7ff;
+      background-color: #142b41;
+      border-radius: 8px;
+    }
+
+    .question p {
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      background-color: #1b3a57;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    label:hover {
+      background-color: #296d98;
+    }
+
+    input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      margin: 30px auto 10px auto;
+      padding: 15px;
+      font-size: 1.1em;
+      background-color: #00f7ff;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #03d2d2;
+    }
+
+    #result {
+      margin-top: 30px;
+      font-size: 1.2em;
+      text-align: center;
+      background-color: #112a41;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    @media screen and (max-width: 480px) {
+      h1 {
+        font-size: 1.5em;
+      }
+
+      button {
+        font-size: 1em;
+      }
+
+      label {
+        font-size: 0.95em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<h1>🦸 Test du Degré d’Héroïsme</h1>
+<p style="text-align: center;">Réponds aux 10 questions pour découvrir ton pourcentage d’héroïsme !</p>
+
+<form id="quizForm"></form>
+
+<button onclick="calculateHeroism()">Calculer mon Héroïsme</button>
+
+<div id="result"></div>
+
+<script>
+  const questions = [
+    "Un immeuble est en feu. Que fais-tu ?",
+    "Tu apprends qu’un camarade triche en mission. Que fais-tu ?",
+    "Quelle est ta motivation principale pour devenir un héros ?",
+    "Ton adversaire se rend. Que fais-tu ?",
+    "Un élève plus faible se fait harceler. Quelle est ta réaction ?",
+    "Ton équipe est en difficulté pendant une mission. Que fais-tu ?",
+    "On t’offre un pouvoir interdit mais très puissant. Que fais-tu ?",
+    "Comment vois-tu les civils ?",
+    "Tu découvres que ton mentor a commis des erreurs graves. Que fais-tu ?",
+    "Tu es blessé, mais quelqu’un a besoin de toi. Tu…"
+  ];
+
+  const options = [
+    ["Je fonce sauver les gens sans hésiter.", 4],
+    ["Je préviens les secours et j’évalue les risques.", 3],
+    ["J’aide si je suis certain d’être en sécurité.", 2],
+    ["Je reste à distance, ce n’est pas mon problème.", 1]
+  ];
+
+  const form = document.getElementById("quizForm");
+
+  questions.forEach((q, index) => {
+    const div = document.createElement("div");
+    div.classList.add("question");
+    div.innerHTML = `<h3>Question ${index + 1}</h3><p>${q}</p>`;
+
+    options.forEach((opt, i) => {
+      const inputId = `q${index}_opt${i}`;
+      div.innerHTML += `
+        <label>
+          <input type="radio" name="q${index}" value="${opt[1]}" required>
+          ${opt[0]}
+        </label>
+      `;
+    });
+
+    form.appendChild(div);
+  });
+
+  function calculateHeroism() {
+    const formData = new FormData(form);
+    let score = 0;
+
+    for (let [key, value] of formData.entries()) {
+      score += parseInt(value);
+    }
+
+    let percent = Math.round((score / 40) * 100);
+    let message = "";
+
+    if (score >= 36) message = "💎 100 % Héroïque : Un véritable symbole de justice !";
+    else if (score >= 30) message = "🔥 85 % Héroïque : Solide, fiable, respecté.";
+    else if (score >= 25) message = "⚡ 65 % Héroïque : Tu as du potentiel, reste concentré.";
+    else if (score >= 20) message = "🌗 50 % Héroïque : Tu balances entre lumière et ombre.";
+    else if (score >= 15) message = "🌩️ 35 % Héroïque : Un anti-héros en devenir ?";
+    else message = "🕳️ 20 % ou moins : Attention… la ligne est fine entre héros et menace.";
+
+    document.getElementById("result").innerHTML = `
+      <strong>Score :</strong> ${score}/40<br>
+      <strong>Pourcentage d’Héroïsme :</strong> ${percent}%<br><br>
+      ${message}
+    `;
+  }
+</script>
+
+</body>
+</html>
