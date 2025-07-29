@@ -46,7 +46,12 @@
       font-weight: bold;
       text-align: center;
     }
-
+    #pseudoDisplay {
+      text-align: center;
+      font-size: 22px;
+      margin-top: 20px;
+      color: #ffcc00;
+    }
     .flash {
       position: fixed;
       top: 0; left: 0;
@@ -57,11 +62,26 @@
       animation: flashAnimation 0.4s ease-out;
       pointer-events: none;
     }
-
     @keyframes flashAnimation {
       0% { opacity: 0; }
       50% { opacity: 1; }
       100% { opacity: 0; }
+    }
+    .thank-you {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 18px;
+      color: #bbbbff;
+    }
+    input[type="text"] {
+      display: block;
+      margin: 0 auto 20px auto;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      width: 80%;
+      max-width: 400px;
     }
   </style>
 </head>
@@ -70,8 +90,9 @@
 <h1>Test de Valeur Héroïque</h1>
 
 <form id="heroTest">
+  <input type="text" id="pseudo" placeholder="Entre ton pseudo ici" required>
 
-  <!-- 10 questions différentes -->
+  <!-- Les 10 questions -->
   <div class="question">
     <p>1. Tu entends une explosion en pleine rue. Que fais-tu ?</p>
     <label><input type="radio" name="q1" value="4"> J’accours sans réfléchir pour sauver des vies.</label>
@@ -155,7 +176,9 @@
   <button type="submit">Voir mon score héroïque</button>
 </form>
 
+<div id="pseudoDisplay"></div>
 <div id="result"></div>
+<div class="thank-you">📸 Merci de faire un screen du résultat et de l’envoyer au professeur.</div>
 
 <!-- Son effet électrique -->
 <audio id="zapSound" src="https://cdn.pixabay.com/audio/2023/03/14/audio_72c1aa3fe4.mp3"></audio>
@@ -197,6 +220,9 @@
     } else {
       message = "🌀 Tu as encore des progrès à faire, jeune recrue.";
     }
+
+    const pseudo = document.getElementById("pseudo").value.trim();
+    document.getElementById("pseudoDisplay").textContent = pseudo ? `👤 Pseudo : ${pseudo}` : "";
 
     document.getElementById("result").textContent = `Score : ${percent}% — ${message}`;
   });
